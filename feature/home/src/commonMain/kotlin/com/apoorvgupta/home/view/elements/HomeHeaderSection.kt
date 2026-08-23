@@ -1,0 +1,43 @@
+package com.apoorvgupta.home.view.elements
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.apoorvgupta.designsystem.reusableComponents.HeadLine
+import com.apoorvgupta.designsystem.reusableComponents.HeadLineText
+import com.apoorvgupta.designsystem.theme.Dimensions
+import com.apoorvgupta.home.intent.HomeIntent
+import com.apoorvgupta.home.intent.HomeViewStates
+
+/**
+ * @author Apoorv Gupta
+ */
+@Composable
+fun HomeHeaderSection(
+    state: HomeViewStates.LoadedData,
+    userIntent: (HomeIntent) -> Unit,
+) {
+    Column {
+        // Headline
+        HeadLine(
+            headLineText = HeadLineText(
+                headText = state.data.homeContent.headingText,
+                subHeadingText = state.data.homeContent.subHeadingText,
+            ),
+            currentTheme = state.data.currentTheme,
+            onHeadClick = {
+                userIntent.invoke(HomeIntent.NavigateToBookmarkPage)
+            },
+            onModeIconClick = {
+                userIntent.invoke(HomeIntent.ToggleAppTheme)
+            },
+        )
+
+        // Divider
+        HorizontalDivider(
+            modifier = Modifier.padding(top = Dimensions.VerticalDimensions.m_vertical_spacing),
+        )
+    }
+}

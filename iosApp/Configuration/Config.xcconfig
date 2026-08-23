@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=kmpAccelerator
+PRODUCT_BUNDLE_IDENTIFIER=com.apoorvgupta.kmp_accelerator.kmp_accelerator(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0

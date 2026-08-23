@@ -1,0 +1,151 @@
+package com.apoorvgupta.designsystem.navigation.ui
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.apoorvgupta.core.utils.emptyValue
+import com.apoorvgupta.designsystem.navigation.Destinations
+import com.apoorvgupta.designsystem.theme.Dimensions
+import com.apoorvgupta.designsystem.theme.shadowBackgroundColor
+import kmp_accelerator.library.designsystem.generated.resources.Res
+import kmp_accelerator.library.designsystem.generated.resources.ic_bookmark_selected
+import kmp_accelerator.library.designsystem.generated.resources.ic_bookmark_unselected
+import kmp_accelerator.library.designsystem.generated.resources.ic_home_selected
+import kmp_accelerator.library.designsystem.generated.resources.ic_home_unselected
+import org.jetbrains.compose.resources.painterResource
+import kotlin.math.roundToInt
+
+/**
+ * Composable function representing the Bottom Navigation Bar in the app.
+ *
+ * This Bottom Navigation Bar provides navigation between Home, Profile, and Settings screens.
+ *
+ * @param navController The NavController used for navigation within the app.
+ *
+ * @author Apoorv Gupta
+ */
+@Composable
+fun BottomNavigationBar(
+    navController: NavController,
+    bottomBarHeight: Dp,
+    bottomBarOffsetHeightPx: MutableState<Float>,
+) {
+    // State variables to track the selected item and current route.
+    var currentRoute by remember { mutableStateOf(Destinations.Home::class.simpleName) }
+
+    val route = navController.currentBackStackEntryAsState().value?.destination?.route
+
+    if (route != null) {
+        currentRoute = route
+    }
+
+    val items = remember { getBottomBarItem() }
+
+    // Build the Bottom Navigation Bar using Jetpack Compose.
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.background,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(bottomBarHeight)
+            .offset {
+                IntOffset(
+                    x = 0,
+                    y = -bottomBarOffsetHeightPx.value.roundToInt(),
+                )
+            }
+            .shadow(
+                elevation = Dimensions.SurroundingDimensions.s_surrounding_spacing,
+                spotColor = MaterialTheme.colorScheme.shadowBackgroundColor,
+            ),
+    ) {
+        items.forEach { item ->
+            val isCurrentRouteSelected =
+                currentRoute?.substringAfterLast(".") == item.navigationRoute::class.simpleName
+
+            NavigationBarItem(
+                alwaysShowLabel = true,
+                icon = {
+                    Image(
+                        painter = painterResource(if (isCurrentRouteSelected) item.selectedIcon else item.unselectedIcon),
+                        contentDescription = String.emptyValue(),
+                        modifier = Modifier.size(Dimensions.IconSize.l_icon_size),
+                        colorFilter = ColorFilter.tint(color = getTextColor(isCurrentRouteSelected)),
+                    )
+
+                    BottomNavBadge(
+                        isCurrentRouteSelected = isCurrentRouteSelected,
+                        bottomNavItem = item,
+                    )
+                },
+                label = {
+                    Text(
+                        text = item.title,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = getTextColor(isCurrentRouteSelected),
+                    )
+                },
+                selected = isCurrentRouteSelected,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.onBackground,
+                    unselectedIconColor = MaterialTheme.colorScheme.onBackground,
+                    selectedTextColor = MaterialTheme.colorScheme.onBackground,
+                    unselectedTextColor = MaterialTheme.colorScheme.onBackground,
+                    indicatorColor = MaterialTheme.colorScheme.background,
+                ),
+                onClick = {
+                    navController.navigate(item.navigationRoute)
+                },
+            )
+        }
+    }
+}
+
+private fun getBottomBarItem() = listOf(
+    BottomNavItem(
+        displayBadge = false,
+        navigationRoute = Destinations.Home,
+        position = 0,
+        title = "Home",
+        visible = true,
+        badgeCount = 0,
+        unselectedIcon = Res.drawable.ic_home_unselected,
+        selectedIcon = Res.drawable.ic_home_selected,
+    ),
+    BottomNavItem(
+        displayBadge = false,
+        navigationRoute = Destinations.Bookmark,
+        position = 2,
+        title = "Bookmark",
+        visible = true,
+        badgeCount = 0,
+        unselectedIcon = Res.drawable.ic_bookmark_unselected,
+        selectedIcon = Res.drawable.ic_bookmark_selected,
+    ),
+)
+
+@Composable
+private fun getTextColor(isCurrentRouteSelected: Boolean) = if (isCurrentRouteSelected) {
+    MaterialTheme.colorScheme.onBackground
+} else {
+    MaterialTheme.colorScheme.onSurface
+}
