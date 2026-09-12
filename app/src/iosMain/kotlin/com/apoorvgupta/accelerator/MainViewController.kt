@@ -1,13 +1,13 @@
-package com.apoorvgupta.kmp_accelerator
+package com.apoorvgupta.accelerator
 
 import androidx.compose.ui.window.ComposeUIViewController
+import com.apoorvgupta.accelerator.di.initKoin
 import com.apoorvgupta.core.logger.AppLogger
-import com.apoorvgupta.kmp_accelerator.di.initKoin
 
 /**
  * @author Apoorv Gupta
  */
-@Suppress("FunctionName")
+@Suppress("FunctionName", "FunctionNaming")
 fun MainViewController() = ComposeUIViewController(
     configure = {
         AppLogger.enableLogging()

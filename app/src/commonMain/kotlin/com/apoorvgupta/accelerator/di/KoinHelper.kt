@@ -1,4 +1,4 @@
-package com.apoorvgupta.kmp_accelerator.di
+package com.apoorvgupta.accelerator.di
 
 import com.apoorvgupta.core.di.coreModule
 import com.apoorvgupta.coroutines.di.coroutinesModule

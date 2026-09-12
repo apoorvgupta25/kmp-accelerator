@@ -1,4 +1,4 @@
-package com.apoorvgupta.kmp_accelerator
+package com.apoorvgupta.accelerator
 
 import com.apoorvgupta.core.interactions.buildConfigProvider.BuildConfigContract
 
