@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.apoorvgupta.kmp_accelerator"
+    namespace = "com.apoorvgupta.accelerator"
 //    compileSdk {
 //        version = release(36)
 //    }

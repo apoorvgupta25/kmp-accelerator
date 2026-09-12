@@ -1,8 +1,8 @@
-package com.apoorvgupta.kmp_accelerator.di
+package com.apoorvgupta.accelerator.di
 
+import com.apoorvgupta.accelerator.AppViewModel
+import com.apoorvgupta.accelerator.BuildConfigContractImpl
 import com.apoorvgupta.core.interactions.buildConfigProvider.BuildConfigContract
-import com.apoorvgupta.kmp_accelerator.AppViewModel
-import com.apoorvgupta.kmp_accelerator.BuildConfigContractImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
