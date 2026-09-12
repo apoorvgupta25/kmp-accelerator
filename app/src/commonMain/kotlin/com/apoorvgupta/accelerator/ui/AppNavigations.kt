@@ -1,4 +1,4 @@
-package com.apoorvgupta.kmp_accelerator.ui
+package com.apoorvgupta.accelerator.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

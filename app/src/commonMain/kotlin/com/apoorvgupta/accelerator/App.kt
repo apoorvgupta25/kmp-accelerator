@@ -1,4 +1,4 @@
-package com.apoorvgupta.kmp_accelerator
+package com.apoorvgupta.accelerator
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Scaffold
@@ -14,13 +14,13 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.navigation.compose.rememberNavController
+import com.apoorvgupta.accelerator.ui.NavigationHost
 import com.apoorvgupta.designsystem.animation.CircularReveal
 import com.apoorvgupta.designsystem.navigation.showNavigationBottomBar
 import com.apoorvgupta.designsystem.navigation.ui.BottomNavigationBar
 import com.apoorvgupta.designsystem.theme.AppTheme
 import com.apoorvgupta.designsystem.theme.Dimensions
 import com.apoorvgupta.domain.model.AppThemeOptions
-import com.apoorvgupta.kmp_accelerator.ui.NavigationHost
 import org.koin.compose.koinInject
 
 /**

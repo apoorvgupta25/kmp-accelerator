@@ -1,4 +1,4 @@
-package com.apoorvgupta.kmp_accelerator
+package com.apoorvgupta.accelerator
 
 import androidx.lifecycle.ViewModel
 import com.apoorvgupta.domain.model.AppThemeOptions

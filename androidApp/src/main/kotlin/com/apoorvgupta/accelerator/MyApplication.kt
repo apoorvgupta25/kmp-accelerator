@@ -1,8 +1,8 @@
-package com.apoorvgupta.kmp_accelerator
+package com.apoorvgupta.accelerator
 
 import android.app.Application
+import com.apoorvgupta.accelerator.di.initKoin
 import com.apoorvgupta.core.logger.AppLogger
-import com.apoorvgupta.kmp_accelerator.di.initKoin
 import org.koin.android.ext.koin.androidContext
 
 /**
